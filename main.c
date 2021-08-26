@@ -6,31 +6,31 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 15:03:47 by emtran            #+#    #+#             */
-/*   Updated: 2021/08/22 16:34:52 by emtran           ###   ########.fr       */
+/*   Updated: 2021/08/23 15:09:52 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
 
-void	ft_putchar(char c)
+int	main(int argc, char **argv)
 {
-	write(1, &c, 1);
-}
+   int		i;
+   int		bitshift;
+   char	word;
 
-void	ft_putnbr(int nb)
-{
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		nb *= -1;
-	}
-	if (nb >= 10)
-		ft_putnbr(nb / 10);
-	ft_putchar(nb % 10 + 48);
-}
-
-int	main(void)
-{
-	ft_putnbr(123456);
-	return (0);
+   if (argc != 2)
+   	return (1);
+   word = argv[1][0];
+   bitshift = -1;
+   printf("%c[%d]: ", word, word);
+   while (++bitshift < 8)
+   {
+   	if (word & 0x80 >> bitshift)
+   		printf("1");
+   	else
+   		printf("0");
+   }
+   printf("\n");
+   return (0);
 }

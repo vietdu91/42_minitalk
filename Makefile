@@ -45,20 +45,27 @@ objs/%.o:		srcs/%.c
 					@mkdir -p objs
 					gcc -Wall -Werror -Wextra -I includes -o $@ -c $<
 
-norme:		norminette {SRCS_C}
-			norminette {SRCS_S}
-			norminette {INCLUDES}
-
+norme:		
+			norminette srcs/*
+			norminette includes/*
+			@printf "$(YELLOW)==============================================================================================\n$(RESET)"
+			@printf "$(GREEN)La vie passe, la norminette trepasse !\n$(RESET)"
 clean:
 			rm -f ${OBJS_C}
 			rm -f ${OBJS_S}
-
+			@printf "$(YELLOW)\n Au fond, est-ce que ranger ça ne revient pas un peu à foutre le bordel dans son désordre ? \n$(RESET)"
+			@printf "$(YELLOW)==============================================================================================\n$(RESET)"
 fclean:
 			rm -f ${OBJS_C}
 			rm -f ${OBJS_S}
 			rm -f ${NAME_C}
 			rm -f ${NAME_S}
+			@printf "$(YELLOW)\n Au fond, est-ce que ranger ça ne revient pas un peu à foutre le bordel dans son désordre ? \n$(RESET)"
+			@printf "$(YELLOW)==============================================================================================\n$(RESET)"
 
 re:			fclean all
-
+			@printf "$(YELLOW)\n Aimer, désirer, c’est aussi souffrir, et être prêt à recommencer... \n$(RESET)"
+			@printf "$(YELLOW)==============================================================================================\n$(RESET)"
+			
+	
 .PHONY: 	bonus all norme clean fclean re
