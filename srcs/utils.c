@@ -6,11 +6,12 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 15:47:24 by emtran            #+#    #+#             */
-/*   Updated: 2021/08/22 19:32:01 by emtran           ###   ########.fr       */
+/*   Updated: 2021/08/26 20:16:27 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
+#include <stdio.h>
 
 void	ft_putstr(char *str)
 {
@@ -22,6 +23,16 @@ void	ft_putstr(char *str)
 		write(1, &str[a], 1);
 		a++;
 	}
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
 
 void	ft_putchar(char c)
