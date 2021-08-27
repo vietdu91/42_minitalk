@@ -6,12 +6,11 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 15:40:15 by emtran            #+#    #+#             */
-/*   Updated: 2021/08/26 20:52:59 by emtran           ###   ########.fr       */
+/*   Updated: 2021/08/27 16:58:44 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
-#include <stdlib.h>
 #include <stdio.h>
 
 void	not_found_404(int argc, char **argv)
@@ -44,30 +43,33 @@ int	the_end_of_the_world(pid_t pid, char *str)
 
 int	lighthouse_signals(char *str, pid_t pid)
 {
+	static char	*nstr = NULL;
 	static int	shift_cape = 0;
 
-	if (!str)
+	if (str)
+		nstr = ft_strdup(str);
+	if (!nstr)
 		houston_we_ve_a_problem(0, 0);
-	while (str[shift_cape / 8])
+	while (nstr[shift_cape / 8])
 	{
-		if (str[shift_cape / 8] & (0x80 >> (shift_cape % 8)))
+		if (nstr[shift_cape / 8] & (0x80 >> (shift_cape % 8)))
 		{
 			if (kill(pid, SIGUSR2) != 0)
-				houston_we_ve_a_problem(str, pid);
+				houston_we_ve_a_problem(nstr, pid);
 			shift_cape++;
 		}
 		else if (kill(pid, SIGUSR1) != 0)
-			houston_we_ve_a_problem(str, pid);
+			houston_we_ve_a_problem(nstr, pid);
 		shift_cape++;
 		usleep(300);
 		return (0);
 	}
-	if (the_end_of_the_world(pid, str) == 0)
+	if (the_end_of_the_world(pid, nstr) == 0)
 		return (0);
-	free(str);
+	free(nstr);
 	return (1);
 }
-
+/*
 void	handler_sigusr_cli(int signum, siginfo_t *info, void *context)
 {
 	int	link;
@@ -90,7 +92,7 @@ void	handler_sigusr_cli(int signum, siginfo_t *info, void *context)
 		exit(0);
 	}
 }
-
+*/
 int	main(int argc, char **argv)
 {
 	pid_t				pid;

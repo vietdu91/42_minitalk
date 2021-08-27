@@ -5,10 +5,12 @@ NAME_S	= server
 
 	# Variables #
 SRCS_C	= client.c \
-		utils.c
+		utils.c \
+		utils_the_retour.c
 
 SRCS_S	= server.c \
-		utils.c
+		utils.c \
+		utils_the_retour.c
 
 INCLUDES = includes/minitalk.h
 

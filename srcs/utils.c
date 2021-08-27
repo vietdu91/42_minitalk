@@ -6,12 +6,11 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 15:47:24 by emtran            #+#    #+#             */
-/*   Updated: 2021/08/26 20:16:27 by emtran           ###   ########.fr       */
+/*   Updated: 2021/08/27 14:10:41 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
-#include <stdio.h>
 
 void	ft_putstr(char *str)
 {
