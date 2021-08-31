@@ -32,13 +32,13 @@ all:		${NAME_C} ${NAME_S}
 bonus:		${NAME_C} ${NAME_S}
 
 $(NAME_C):	${OBJS_C}
-			gcc -Wall -Werror -Wextra -I includes ${OBJS_C} -o $(NAME_C)
+			gcc -Wall -Werror -Wextra -fsanitize=address -I includes ${OBJS_C} -o $(NAME_C)
 			@printf "$(YELLOW)\n Règle du jeu : mettre l’argent du client dans sa poche.\n$(RESET)"
 			@printf "$(YELLOW)==============================================================================================\n$(RESET)"
 			@printf "$(GREEN)La vie passe...\n\n$(RESET)"
 
 $(NAME_S):	${OBJS_S}
-			gcc -Wall -Werror -Wextra -I includes ${OBJS_S} -o $(NAME_S)
+			gcc -Wall -Werror -Wextra -fsanitize=address -I includes ${OBJS_S} -o $(NAME_S)
 			@printf "$(YELLOW)\n Que la damnation puisse être éternelle suppose en fin de compte que le péché n'a point de fin.\n$(RESET)"
 			@printf "$(YELLOW)==============================================================================================\n$(RESET)"
 			@printf "$(GREEN)...la moulinette trepasse !\n$(RESET)"

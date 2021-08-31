@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 15:47:24 by emtran            #+#    #+#             */
-/*   Updated: 2021/08/27 14:10:41 by emtran           ###   ########.fr       */
+/*   Updated: 2021/08/30 13:52:30 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int	ft_strlen(char *str)
 {
 	int	i;
 
+	if (str == 0)
+		return (0);
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 		i++;
 	return (i);
 }

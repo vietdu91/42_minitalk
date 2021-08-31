@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 15:40:19 by emtran            #+#    #+#             */
-/*   Updated: 2021/08/27 16:56:19 by emtran           ###   ########.fr       */
+/*   Updated: 2021/08/30 15:53:59 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,57 +19,58 @@ char	*str_factory(char *str, char j)
 	char	*nstr;
 	int		i;
 
-	if (str != 0 && j != 0)
+	if (str == 0)
 	{
-		len = ft_strlen(str);
-		nstr = (char *)malloc(sizeof(char) * (len + 22));
+		nstr = (char *)malloc(sizeof(char) * 2);
 		if (nstr == 0)
 			return (0);
-		i = -1;
-		while (str[++i])
-			nstr[i] = str[i];
-		nstr[len] = j;
-		nstr[len + 1] = '\0';
+		nstr[0] = j;
+		nstr[1] = '\0';
 		return (nstr);
 	}
-	return (0);
+	len = ft_strlen(str);
+	nstr = (char *)malloc(sizeof(char) * (len + 50));
+	if (nstr == 0)
+		return (0);
+	i = -1;
+	while (str[++i] && str != 0)
+		nstr[i] = str[i];
+	nstr[len] = j;
+	nstr[len + 1] = '\0';
+	return (nstr);
 }
 
 void	handler_sigusr_serv(int signum, siginfo_t *info, void *context)
 {
 	static char		i = 0xFF;
-	static pid_t	pid = 0;
 	static int		bites = 0;
 	static char		*str = NULL;
 
+	(void)info;
 	(void)context;
-	if (info->si_pid)
-		pid = info->si_pid;
-//	ft_putchar(i);
-//	fflush(stdout);
-//	ft_putnbr(pid);
-//	fflush(stdout);			
 	if (signum == SIGUSR1)
+	{
+//		ft_putnbr(0);
 		i ^= 0x80 >> bites;
+	}
 	else if (signum == SIGUSR2)
+	{
+//		ft_putnbr(1);
 		i |= 0x80 >> bites;
-//	ft_putnbr(bites);
-//	fflush(stdout);	
+	}
 	bites++;
 	if (bites == 8)
 	{
 		if (i)
-			str = str_factory(str, i);
-		else
 		{
+			str = str_factory(str, i);
 			ft_putstr(str);
 			free(str);
+			str = NULL;
 		}
 		bites = 0;
 		i = 0xFF;
 	}
-	if (kill(pid, SIGUSR1) != 0)
-		houston_we_ve_a_problem(str, pid);
 }
 
 int	main(void)
@@ -84,11 +85,9 @@ int	main(void)
 	ft_putstr("TADAM ! The magical PID is : ");
 	ft_putnbr(pid);
 	ft_putchar('\n');
+	sigaction(SIGUSR1, &s_sigactor, NULL);
+	sigaction(SIGUSR2, &s_sigactor, NULL);
 	while (1)
-	{
-		sigaction(SIGUSR1, &s_sigactor, NULL);
-		sigaction(SIGUSR2, &s_sigactor, NULL);
 		pause();
-	}
 	return (0);
 }

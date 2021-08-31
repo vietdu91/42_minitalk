@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 15:47:48 by emtran            #+#    #+#             */
-/*   Updated: 2021/08/27 16:05:45 by emtran           ###   ########.fr       */
+/*   Updated: 2021/08/30 11:28:15 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	handler_sigusr_serv(int signum, siginfo_t *info, void *context);
 void	not_found_404(int argc, char **argv);
 int		the_end_of_the_world(pid_t pid, char *str);
 int		lighthouse_signals(char *str, pid_t pid);
-void	handler_sigusr_cli(int signum, siginfo_t *info, void *context);
 
 /* UTILS */
 
