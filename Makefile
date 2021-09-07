@@ -1,11 +1,11 @@
 	# Library Name #
 NAME_C	= client
 
-NAME_BC	= client
+NAME_BC	= client_bonus
 
 NAME_S	= server
 
-NAME_BS	= server
+NAME_BS	= server_bonus
 
 	# Variables #
 SRCS_C	= client.c \
@@ -69,9 +69,9 @@ $(NAME_BC):	${OBJS_BC}
 
 $(NAME_BS):	${OBJS_BS}
 			gcc -Wall -Werror -Wextra -fsanitize=address -I includes ${OBJS_BS} -o $(NAME_BS)
-			@printf "$(YELLOW)\n Règle du jeu : mettre l’argent du client dans sa poche.\n$(RESET)"
+			@printf "$(YELLOW)\n Que la damnation puisse être éternelle suppose en fin de compte que le péché n'a point de fin.\n$(RESET)"
 			@printf "$(YELLOW)==============================================================================================\n$(RESET)"
-			@printf "$(GREEN)La vie passe...\n\n$(RESET)"
+			@printf "$(GREEN)...la moulinette trepasse !\n$(RESET)"
 
 objs/%.o:		srcs/%.c
 					@mkdir -p objs

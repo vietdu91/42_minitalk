@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:17 by emtran            #+#    #+#             */
-/*   Updated: 2021/09/02 16:06:33 by emtran           ###   ########.fr       */
+/*   Updated: 2021/09/07 11:28:10 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,34 @@ char	*str_factory(char *str, char j)
 	return (nstr);
 }
 
+void	decollage_immediat(char *str, char i)
+{
+	str = str_factory(str, i);
+	ft_putstr(str);
+	free(str);
+	str = NULL;
+}
+
+void	its_the_end(char *str)
+{
+	if (str)
+	{
+		free(str);
+		str = NULL;
+	}
+	exit(EXIT_FAILURE);
+}
+
 void	handler_sigusr_serv(int signum, siginfo_t *info, void *context)
 {
 	static char		i = 0xFF;
 	static int		bites = 0;
+	static int		pid_c = 0;
 	static char		*str = NULL;
 
-	(void)info;
 	(void)context;
+	if (info->si_pid)
+		pid_c = info->si_pid;
 	if (signum == SIGUSR1)
 		i ^= 0x80 >> bites;
 	else if (signum == SIGUSR2)
@@ -56,15 +76,12 @@ void	handler_sigusr_serv(int signum, siginfo_t *info, void *context)
 	if (bites == 8)
 	{
 		if (i)
-		{
-			str = str_factory(str, i);
-			ft_putstr(str);
-			free(str);
-			str = NULL;
-		}
+			decollage_immediat(str, i);
 		bites = 0;
 		i = 0xFF;
 	}
+	if (kill(pid_c, SIGUSR1) == -1)
+		its_the_end(str);
 }
 
 int	main(void)
@@ -76,12 +93,11 @@ int	main(void)
 	s_sigactor.sa_flags = SA_SIGINFO;
 	sigemptyset(&s_sigactor.sa_mask);
 	pid = getpid();
-	ft_putstr("TADAM ! The magical PID is : ");
+	ft_putstr("TADAM ! Ready to decoller 🚀 ? The magical PID is : ");
 	ft_putnbr(pid);
 	ft_putchar('\n');
 	sigaction(SIGUSR1, &s_sigactor, NULL);
 	sigaction(SIGUSR2, &s_sigactor, NULL);
 	while (1)
 		pause();
-	return (0);
 }
