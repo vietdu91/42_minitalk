@@ -6,12 +6,11 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:17 by emtran            #+#    #+#             */
-/*   Updated: 2021/09/07 11:28:10 by emtran           ###   ########.fr       */
+/*   Updated: 2021/09/09 12:14:18 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
-#include <stdio.h>
 
 char	*str_factory(char *str, char j)
 {
@@ -35,6 +34,7 @@ char	*str_factory(char *str, char j)
 	i = -1;
 	while (str[++i] && str != 0)
 		nstr[i] = str[i];
+	free(str);
 	nstr[len] = j;
 	nstr[len + 1] = '\0';
 	return (nstr);

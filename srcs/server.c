@@ -6,12 +6,11 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 15:40:19 by emtran            #+#    #+#             */
-/*   Updated: 2021/08/30 15:53:59 by emtran           ###   ########.fr       */
+/*   Updated: 2021/09/07 18:11:03 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
-#include <stdio.h>
 
 char	*str_factory(char *str, char j)
 {
@@ -35,6 +34,7 @@ char	*str_factory(char *str, char j)
 	i = -1;
 	while (str[++i] && str != 0)
 		nstr[i] = str[i];
+	free(str);
 	nstr[len] = j;
 	nstr[len + 1] = '\0';
 	return (nstr);
@@ -58,7 +58,7 @@ void	handler_sigusr_serv(int signum, siginfo_t *info, void *context)
 		if (i)
 		{
 			str = str_factory(str, i);
-			ft_putstr(str);
+			ft_putchar(i);
 			free(str);
 			str = NULL;
 		}
@@ -76,7 +76,7 @@ int	main(void)
 	s_sigactor.sa_flags = SA_SIGINFO;
 	sigemptyset(&s_sigactor.sa_mask);
 	pid = getpid();
-	ft_putstr("TADAM ! The magical PID is : ");
+	ft_putstr("TADAM ! Ready to decoller 🚀 ? The magical PID is : ");
 	ft_putnbr(pid);
 	ft_putchar('\n');
 	sigaction(SIGUSR1, &s_sigactor, NULL);

@@ -6,12 +6,11 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 15:40:15 by emtran            #+#    #+#             */
-/*   Updated: 2021/08/30 15:45:07 by emtran           ###   ########.fr       */
+/*   Updated: 2021/09/07 17:57:27 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
-#include <stdio.h>
 
 void	not_found_404(int argc, char **argv)
 {
@@ -20,7 +19,7 @@ void	not_found_404(int argc, char **argv)
 		ft_putstr("Shit ! Bad number of arguments : not going too quickly...\n");
 		ft_putstr("Il ne faut jamais aller plus vite que sa vitesse...");
 	}
-	if (check_str_nb(argv[1]) == 1)
+	else if (check_str_nb(argv[1]) == 1)
 	{
 		ft_putstr("Oups ! There's an error somewhere...\n");
 		ft_putstr("Have a cup of tea ~~ and refocus... !");
@@ -56,7 +55,7 @@ int	main(int argc, char **argv)
 	if (argc != 3 || check_str_nb(argv[1]) == 1)
 	{
 		not_found_404(argc, argv);
-		return (-1);
+		exit(EXIT_FAILURE);
 	}
 	pid = ft_atoi(argv[1]);
 	lighthouse_signals(argv[2], pid);

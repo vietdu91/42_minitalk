@@ -6,12 +6,11 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:07:07 by emtran            #+#    #+#             */
-/*   Updated: 2021/09/07 11:40:21 by emtran           ###   ########.fr       */
+/*   Updated: 2021/09/09 12:15:19 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
-#include <stdio.h>
 
 void	not_found_404(int argc, char **argv)
 {
@@ -20,36 +19,18 @@ void	not_found_404(int argc, char **argv)
 		ft_putstr("Shit ! Bad number of arguments : not going too quickly...\n");
 		ft_putstr("Il ne faut jamais aller plus vite que sa vitesse...");
 	}
-	if (check_str_nb(argv[1]) == 1)
+	else if (check_str_nb(argv[1]) == 1)
 	{
 		ft_putstr("Oups ! There's an error somewhere...\n");
 		ft_putstr("Have a cup of tea ~~ and refocus... !");
 	}
 }
 
-int	landing_of_null(pid_t pid, char *str)
-{
-	static int	i = 0;
-
-	if (i != 8)
-	{
-		if (kill(pid, SIGUSR1) == -1)
-		{
-			free(str);
-			str = NULL;
-			exit(EXIT_FAILURE);
-		}
-		i++;
-		return (0);
-	}
-	return (1);
-}
-
 int	lighthouse_signals(char *str, pid_t pid)
 {
 	static char	*nstr = NULL;
 	static int	pid_s = 0;
-	static int	shift_cape = 0;
+	static int	shift_cape = -1;
 
 	if (str)
 		nstr = ft_strdup(str);
@@ -57,18 +38,15 @@ int	lighthouse_signals(char *str, pid_t pid)
 		pid_s = pid;
 	if (!nstr)
 		houston_we_ve_a_problem(0, 0);
-	while (nstr[shift_cape / 8])
+	while (nstr[++shift_cape / 8])
 	{
 		if (nstr[shift_cape / 8] & (0x80 >> (shift_cape % 8)))
 			kill(pid_s, SIGUSR2);
 		else
 			kill(pid_s, SIGUSR1);
-		usleep(1);
-		shift_cape++;
+		usleep(10);
 		return (0);
 	}
-	if (landing_of_null(pid_s, str) == 1)
-		return (0);
 	free(nstr);
 	return (1);
 }
