@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:06:17 by emtran            #+#    #+#             */
-/*   Updated: 2021/09/09 12:14:18 by emtran           ###   ########.fr       */
+/*   Updated: 2021/09/09 13:48:22 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	main(void)
 	s_sigactor.sa_flags = SA_SIGINFO;
 	sigemptyset(&s_sigactor.sa_mask);
 	pid = getpid();
-	ft_putstr("TADAM ! Ready to decoller 🚀 ? The magical PID is : ");
+	ft_putstr(DECOLLAGE);
 	ft_putnbr(pid);
 	ft_putchar('\n');
 	sigaction(SIGUSR1, &s_sigactor, NULL);

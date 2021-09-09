@@ -6,12 +6,22 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 15:47:48 by emtran            #+#    #+#             */
-/*   Updated: 2021/09/09 12:14:40 by emtran           ###   ########.fr       */
+/*   Updated: 2021/09/09 13:48:06 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
+
+# define DECOLLAGE "TADAM ! Ready to decoller 🚀 ? The magical PID is : "
+# define BAD_ARG "Shit ! Bad number of arguments : not going too quickly...\n"
+# define NOT_NB "Oups ! There's an error somewhere...\n"
+# define TEA_TIME "Have a cup of tea ~~ and refocus... !"
+# define B_SGL "Allo ? Je ne vous entends plus ? Tous les cris les SOS !!!\n "
+# define GOOD_JOB "Mission accomplished ! \n"
+# define CIT_1 "Il ne faut jamais aller plus vite que sa vitesse..."
+# define CIT_2 "Lorsque tu accomplis ta mission en t'appuyant sur toi-même"
+# define CIT_2BIS ", tu goûtes le fruit de la maturité...\n"
 
 # include <sys/types.h>
 # include <unistd.h>

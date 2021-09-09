@@ -6,7 +6,7 @@
 /*   By: emtran <emtran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:07:07 by emtran            #+#    #+#             */
-/*   Updated: 2021/09/09 12:15:19 by emtran           ###   ########.fr       */
+/*   Updated: 2021/09/09 13:47:00 by emtran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	not_found_404(int argc, char **argv)
 {
 	if (argc != 3)
 	{
-		ft_putstr("Shit ! Bad number of arguments : not going too quickly...\n");
-		ft_putstr("Il ne faut jamais aller plus vite que sa vitesse...");
+		ft_putstr(BAD_ARG);
+		ft_putstr(CIT_1);
 	}
 	else if (check_str_nb(argv[1]) == 1)
 	{
-		ft_putstr("Oups ! There's an error somewhere...\n");
-		ft_putstr("Have a cup of tea ~~ and refocus... !");
+		ft_putstr(NOT_NB);
+		ft_putstr(TEA_TIME);
 	}
 }
 
@@ -60,15 +60,14 @@ void	handler_sigusr_c(int signum)
 		final = lighthouse_signals(0, 0);
 	else if (signum == SIGUSR2)
 	{
-		ft_putstr("Allo ? Allo ? Je ne vous entends plus ? ");
-		ft_putstr("Tous les cris les SOS !!!\n");
+		ft_putstr(B_SGL);
 		exit(EXIT_FAILURE);
 	}
 	if (final)
 	{
-		ft_putstr("Mission accomplished ! \n");
-		ft_putstr("Lorsque tu accomplis ta mission en t'appuyant sur toi-même");
-		ft_putstr(", tu goûtes le fruit de la maturité...\n");
+		ft_putstr(GOOD_JOB);
+		ft_putstr(CIT_2);
+		ft_putstr(CIT_2BIS);
 		exit(EXIT_SUCCESS);
 	}
 }
